@@ -92,8 +92,9 @@ def main():
     validate_with_rdkit()
     print()
 
-    for target in ["CC(=O)Nc1ccc(O)cc1",       # paracetamol
-                   "CC(=O)Oc1ccccc1C(=O)O"]:   # aspirin
+    for target in ["CC(=O)Nc1ccc(O)cc1",              # paracetamol
+                   "CC(=O)Oc1ccccc1C(=O)O",           # aspirin
+                   "CC(C)Cc1ccc(C(C)C(=O)O)cc1"]:     # ibuprofen
         compare(target)
 
     print("For the plots and trees as images, run: python figures.py")

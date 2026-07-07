@@ -28,16 +28,23 @@ class Reaction:
 NAMES = {
     "CC(=O)Nc1ccc(O)cc1": "Paracetamol (target)",
     "CC(=O)Oc1ccccc1C(=O)O": "Aspirin (target)",
+    "CC(C)Cc1ccc(C(C)C(=O)O)cc1": "Ibuprofen (target)",
     "Nc1ccc(O)cc1": "4-aminophenol",
     "O=[N+]([O-])c1ccc(O)cc1": "4-nitrophenol",
     "O=C(O)c1ccccc1O": "salicylic acid",
+    "CC(O)c1ccc(CC(C)C)cc1": "1-(4-isobutylphenyl)ethanol",
+    "CC(=O)c1ccc(CC(C)C)cc1": "4-isobutylacetophenone",
+    "CC(C)Cc1ccccc1": "isobutylbenzene",
     "Oc1ccccc1": "phenol",
     "CC(=O)OC(C)=O": "acetic anhydride",
     "CC(=O)O": "acetic acid",
     "O=[N+]([O-])c1ccccc1": "nitrobenzene",
     "c1ccccc1": "benzene",
+    "CC(C)CCl": "isobutyl chloride",
+    "CC(=O)Cl": "acetyl chloride",
     "DEADEND_A": "unreachable intermediate (trap)",
     "DEADEND_B": "unreachable intermediate (trap)",
+    "DEADEND_C": "unreachable intermediate (trap)",
 }
 
 
@@ -52,6 +59,8 @@ CATALOG: frozenset[str] = frozenset({
     "CC(=O)O",              # acetic acid
     "O=[N+]([O-])c1ccccc1", # nitrobenzene
     "c1ccccc1",             # benzene
+    "CC(C)CCl",             # isobutyl chloride
+    "CC(=O)Cl",             # acetyl chloride
 })
 
 
@@ -82,6 +91,20 @@ REACTIONS: list[Reaction] = [
              ("DEADEND_B", "CC(=O)O")),  # trap
     Reaction("Kolbe-Schmitt", "O=C(O)c1ccccc1O",
              ("Oc1ccccc1",)),
+
+    # ibuprofen (BHC route, read backwards, 4 steps deep)
+    Reaction("carbonylation", "CC(C)Cc1ccc(C(C)C(=O)O)cc1",
+             ("CC(O)c1ccc(CC(C)C)cc1",)),
+    Reaction("non-productive disconnection", "CC(C)Cc1ccc(C(C)C(=O)O)cc1",
+             ("DEADEND_C",)),  # trap
+    Reaction("carbonyl reduction", "CC(O)c1ccc(CC(C)C)cc1",
+             ("CC(=O)c1ccc(CC(C)C)cc1",)),
+    Reaction("Friedel-Crafts acylation (Ac2O)", "CC(=O)c1ccc(CC(C)C)cc1",
+             ("CC(C)Cc1ccccc1", "CC(=O)OC(C)=O")),
+    Reaction("Friedel-Crafts acylation (AcCl)", "CC(=O)c1ccc(CC(C)C)cc1",
+             ("CC(C)Cc1ccccc1", "CC(=O)Cl")),  # variant with acetyl chloride
+    Reaction("Friedel-Crafts alkylation", "CC(C)Cc1ccccc1",
+             ("c1ccccc1", "CC(C)CCl")),
 ]
 
 

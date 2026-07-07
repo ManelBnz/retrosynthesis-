@@ -14,8 +14,9 @@ from search import astar, ida_star
 TARGETS = {
     "Paracetamol": "CC(=O)Nc1ccc(O)cc1",
     "Aspirin":     "CC(=O)Oc1ccccc1C(=O)O",
+    "Ibuprofen":   "CC(C)Cc1ccc(C(C)C(=O)O)cc1",
 }
-EXPECTED_OPTIMAL = {"Paracetamol": 3, "Aspirin": 2}
+EXPECTED_OPTIMAL = {"Paracetamol": 3, "Aspirin": 2, "Ibuprofen": 4}
 
 
 def test_optimality():

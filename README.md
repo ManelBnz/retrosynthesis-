@@ -48,16 +48,22 @@ IDA\* with its threshold on f = g + h.
 
 ## What we get
 
-Two real targets, paracetamol and aspirin, with their classic syntheses.
+Three real targets with their classic syntheses: paracetamol (3 reactions),
+aspirin (2 reactions) and ibuprofen (4 reactions).
 
-The route found by A\* for paracetamol (3 reactions):
+The route found by A\* for paracetamol:
 
 ![Paracetamol synthesis tree](figures/tree_paracetamol.png)
 
-The same kind of result for aspirin (2 reactions) is in `figures/tree_aspirin.png`.
+Ibuprofen is the deepest one, its route has four steps (the BHC synthesis read
+backwards):
 
-On these real targets, A\* and IDA\* expand slightly fewer nodes than Dijkstra:
-the node saved is exactly the dead end, cut off by the heuristic.
+![Ibuprofen synthesis tree](figures/tree_ibuprofen.png)
+
+The aspirin route (2 reactions) is in `figures/tree_aspirin.png`.
+
+On these real targets, A\* and IDA\* expand fewer nodes than Dijkstra: the nodes
+saved are the dead ends, cut off by the heuristic.
 
 ![Comparison on the drugs](figures/comparison.png)
 

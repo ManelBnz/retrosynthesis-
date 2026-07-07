@@ -25,6 +25,7 @@ OUTDIR = os.path.join(os.path.dirname(__file__), "figures")
 TARGETS = {
     "Paracetamol": "CC(=O)Nc1ccc(O)cc1",
     "Aspirin":     "CC(=O)Oc1ccccc1C(=O)O",
+    "Ibuprofen":   "CC(C)Cc1ccc(C(C)C(=O)O)cc1",
 }
 
 
@@ -55,7 +56,7 @@ def figure_scaling():
 def figure_comparison():
     """Bars: nodes expanded per algorithm on the real targets."""
     algos = ["Dijkstra", "A* (hsum)", "IDA*"]
-    colors = {"Paracetamol": "#4c72b0", "Aspirin": "#dd8452"}
+    colors = {"Paracetamol": "#4c72b0", "Aspirin": "#dd8452", "Ibuprofen": "#55a868"}
     values = {label: [] for label in TARGETS}
 
     for label, smiles in TARGETS.items():
@@ -65,10 +66,11 @@ def figure_comparison():
         values[label] = [d.nodes_expanded, a.nodes_expanded, i.nodes_expanded]
 
     x = range(len(algos))
-    width = 0.35
+    n = len(values)
+    width = 0.8 / n
     plt.figure(figsize=(8, 5))
     for k, (label, vals) in enumerate(values.items()):
-        pos = [xi + (k - 0.5) * width for xi in x]
+        pos = [xi + (k - (n - 1) / 2) * width for xi in x]
         bars = plt.bar(pos, vals, width, label=label,
                        color=colors[label], edgecolor="black", linewidth=0.6)
         for b, v in zip(bars, vals):
