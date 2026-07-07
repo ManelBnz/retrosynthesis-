@@ -85,13 +85,12 @@ With Python 3.11:
 ```
 python main.py        text demo (routes + comparison)
 python tests.py       check optimality and admissibility
-python figures.py     generate the images in figures/
 python benchmark.py   the scaling table
 ```
 
-No required dependency for the core of the project. The images use matplotlib.
-If RDKit is installed (`conda install -c conda-forge rdkit`), the program also
-checks that every SMILES is a real molecule and prints its molecular formula.
+No required dependency to run the search. If RDKit is installed
+(`conda install -c conda-forge rdkit`), the program also checks that every
+SMILES is a real molecule and prints its molecular formula.
 
 ## The files
 
@@ -99,6 +98,5 @@ checks that every SMILES is a real molecule and prints its molecular formula.
 * `reactions.py` : the catalog and the reactions (the chemistry)
 * `retro_problem.py` : the retrosynthesis problem and the heuristics
 * `benchmark.py` : the scaling test
-* `figures.py` : generation of the plots and trees
 * `main.py` : the demo
 * `tests.py` : the checks
